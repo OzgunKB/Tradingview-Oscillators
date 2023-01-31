@@ -1,5 +1,5 @@
 //@version=5
-indicator(title="Stochastic RSI", shorttitle="Stoch RSI", format=format.price, precision=2, timeframe="", timeframe_gaps=true)
+indicator(title="Stochastic RSI", shorttitle="Stoch RSI", format=format.price, precision=2, timeframe="", timeframe_gaps=true, overlay=false)
 smoothK = input.int(3, "K", minval=1)
 smoothD = input.int(3, "D", minval=1)
 lengthRSI = input.int(14, "RSI Length", minval=1)
