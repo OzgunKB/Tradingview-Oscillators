@@ -35,3 +35,6 @@ fill(bbUpperBand, bbLowerBand, color= isBB ? color.new(color.green, 90) : na, ti
 
 rsilong= ta.crossover(rsi, rsiMA)
 bgcolor( rsilong ? color.new(color.green, 70) : na,  title="RSI Bullish Crossover")
+
+rsishort= ta.crossunder(rsi, rsiMA)
+bgcolor( rsishort ? color.new(color.red, 70) : na,  title="RSI Bearish Crossover")
