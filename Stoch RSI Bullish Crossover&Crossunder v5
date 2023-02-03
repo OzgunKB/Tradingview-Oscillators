@@ -1,5 +1,5 @@
 //@version=5
-indicator(title="Stochastic RSI", shorttitle="Stoch RSI", format=format.price, precision=2, timeframe="", timeframe_gaps=true, overlay=false)
+indicator(title="Stochastic RSI", shorttitle="Stoch RSI", format=format.price, precision=2, timeframe="", timeframe_gaps=true)
 smoothK = input.int(3, "K", minval=1)
 smoothD = input.int(3, "D", minval=1)
 lengthRSI = input.int(14, "RSI Length", minval=1)
@@ -17,3 +17,6 @@ fill(h0, h1, color=color.rgb(33, 150, 243, 90), title="Background")
 
 stochlong1= ta.crossover(k,d)
 bgcolor(stochlong1 ? color.new(color.green, 70) : na, title='Stoch Bullish Crossover', transp=90)
+
+stochshort1= ta.crossunder(k,d)
+bgcolor(stochshort1 ? color.new(color.red, 70) : na, title='Stoch Bearish Crossover', transp=90)
