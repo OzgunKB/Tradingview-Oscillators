@@ -16,7 +16,13 @@ hline(100, title="Hundred Line", color=#787B86, linestyle=hline.style_dotted)
 hline(-100, title="Minus Line", color=#787B86, linestyle=hline.style_dotted)
 
 woodieslong= ta.crossover(cci14,cciTurbo) and cci14>0 and cciTurbo>0
-bgcolor(woodieslong ? color.new(color.green, 70) : na, title='Vortex Bullish Cross', transp=90)
+woodieslong2= woodieslong[1] and cci14>cciTurbo and cciTurbo>0
+bgcolor(woodieslong2 ? color.new(color.green, 70) : na, title='Vortex Bullish Cross', transp=90)
 
 woodiesshort= ta.crossunder(cci14,cciTurbo) and cci14<0 and cciTurbo<0
-bgcolor(woodiesshort ? color.new(color.red, 70) : na, title='Vortex Bearish Cross', transp=90)
+woodiesshort2= woodiesshort[1] and cci14<cciTurbo and cciTurbo<0
+bgcolor(woodiesshort2 ? color.new(color.red, 70) : na, title='Vortex Bearish Cross', transp=90)
+
+//-------------------- Alerting
+alertcondition(woodieslong2, 'Buy', 'Go long!')
+alertcondition(woodiesshort2, 'Sell', 'Go short!')
