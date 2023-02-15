@@ -1,0 +1,24 @@
+//@version=5
+indicator(title="Klinger Oscillator", format=format.volume, timeframe="", timeframe_gaps=true)
+var cumVol = 0.
+cumVol += nz(volume)
+if barstate.islast and cumVol == 0
+    runtime.error("No volume is provided by the data vendor.")
+sv = ta.change(hlc3) >= 0 ? volume : -volume
+kvo = ta.ema(sv, 34) - ta.ema(sv, 55)
+sig = ta.ema(kvo, 13)
+plot(kvo, color = #2962FF)
+plot(sig, color = #43A047)
+
+klingershort= ta.crossunder(kvo, sig)
+klingershort2= klingershort[1] and kvo<sig and kvo<kvo[1]
+klingerlong= ta.crossover(kvo, sig) and not klingershort[1]
+klingerlong2= klingerlong[1] and kvo>sig and kvo>kvo[1]
+
+bgcolor( klingerlong2 ? color.new(color.green, 70) : na,  title="Klinger Bullish Crossover")
+
+bgcolor( klingershort2 ? color.new(color.red, 70) : na,  title="Klinger Bearish Crossover")
+
+//-------------------- Alerting
+alertcondition(klingerlong2, 'Buy', 'Go long!')
+alertcondition(klingershort2, 'Sell', 'Go short!')
