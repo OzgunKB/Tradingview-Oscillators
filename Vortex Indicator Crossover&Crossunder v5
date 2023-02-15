@@ -1,0 +1,16 @@
+//@version=5
+indicator(title = "Vortex Indicator", shorttitle="VI", format=format.price, precision=4, timeframe="", timeframe_gaps=true)
+period_ = input.int(14, title="Length", minval=2)
+VMP = math.sum( math.abs( high - low[1]), period_ )
+VMM = math.sum( math.abs( low - high[1]), period_ )
+STR = math.sum( ta.atr(1), period_ )
+VIP = VMP / STR
+VIM = VMM / STR
+plot(VIP, title="VI +", color=#2962FF)
+plot(VIM, title="VI -", color=#E91E63)
+
+vilong= ta.crossover(VIP,VIM)
+bgcolor(vilong ? color.new(color.green, 70) : na, title='Vortex Bullish Cross', transp=90)
+
+vishort= ta.crossunder(VIP,VIM)
+bgcolor(vishort ? color.new(color.red, 70) : na, title='Vortex Bearish Cross', transp=90)
