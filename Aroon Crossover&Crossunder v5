@@ -7,7 +7,7 @@ plot(upper, "Aroon Up", color=#FB8C00)
 plot(lower, "Aroon Down", color=#2962FF)
 
 aroonlong= ta.crossover(upper, lower)
-bgcolor( aroonlong ? color.new(color.green, 70) : na,  title="RSI Bullish Crossover")
+bgcolor( aroonlong ? color.new(color.green, 70) : na,  title="Aroon Bullish Crossover")
 
 aroonshort= ta.crossunder(upper, lower)
-bgcolor( aroonshort ? color.new(color.red, 70) : na,  title="RSI Bearish Crossover")
+bgcolor( aroonshort ? color.new(color.red, 70) : na,  title="Aroon Bearish Crossover")
