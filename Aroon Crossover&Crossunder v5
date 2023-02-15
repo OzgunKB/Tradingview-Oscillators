@@ -1,0 +1,13 @@
+//@version=5
+indicator(title="Aroon", shorttitle="Aroon LS", overlay=false, format=format.percent, precision=2, timeframe="", timeframe_gaps=true, overlay=false)
+length = input.int(14, minval=1)
+upper = 100 * (ta.highestbars(high, length) + length)/length
+lower = 100 * (ta.lowestbars(low, length) + length)/length
+plot(upper, "Aroon Up", color=#FB8C00)
+plot(lower, "Aroon Down", color=#2962FF)
+
+aroonlong= ta.crossover(upper, lower)
+bgcolor( aroonlong ? color.new(color.green, 70) : na,  title="RSI Bullish Crossover")
+
+aroonshort= ta.crossunder(upper, lower)
+bgcolor( aroonshort ? color.new(color.red, 70) : na,  title="RSI Bearish Crossover")
