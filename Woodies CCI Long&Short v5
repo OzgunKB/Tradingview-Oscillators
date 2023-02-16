@@ -1,7 +1,7 @@
 //@version=5
 indicator(title="Woodies CCI", timeframe="", timeframe_gaps=true)
-cciTurboLength = input.int(title="CCI Turbo Length", defval=6, minval=3, maxval=14)
-cci14Length = input.int(title="CCI 14 Length", defval=14, minval=7, maxval=20)
+cciTurboLength = input.int(title="CCI Turbo Length", defval=12, minval=3, maxval=333)
+cci14Length = input.int(title="CCI 14 Length", defval=28, minval=7, maxval=333)
 source = close
 cciTurbo = ta.cci(source, cciTurboLength)
 cci14 = ta.cci(source, cci14Length)
@@ -15,12 +15,12 @@ hline(0, title="Zero Line", color=#787B86, linestyle=hline.style_solid)
 hline(100, title="Hundred Line", color=#787B86, linestyle=hline.style_dotted)
 hline(-100, title="Minus Line", color=#787B86, linestyle=hline.style_dotted)
 
-woodieslong= ta.crossover(cci14,cciTurbo) and cci14>0 and cciTurbo>0
-woodieslong2= woodieslong[1] and cci14>cciTurbo and cciTurbo>0
+woodieslong= ta.crossunder(cci14, cciTurbo) 
+woodieslong2= woodieslong[1] and cciTurbo>cci14
 bgcolor(woodieslong2 ? color.new(color.green, 70) : na, title='Vortex Bullish Cross', transp=90)
 
-woodiesshort= ta.crossunder(cci14,cciTurbo) and cci14<0 and cciTurbo<0
-woodiesshort2= woodiesshort[1] and cci14<cciTurbo and cciTurbo<0
+woodiesshort= ta.crossover(cci14,cciTurbo) 
+woodiesshort2= woodiesshort[1] and cci14>cciTurbo 
 bgcolor(woodiesshort2 ? color.new(color.red, 70) : na, title='Vortex Bearish Cross', transp=90)
 
 //-------------------- Alerting
