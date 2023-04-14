@@ -1,2 +1,2 @@
 # Tradingview-Oscillators
-TradingView Indicators and Strategies (pinescript)
+TradingView Indicators (pinescript)
